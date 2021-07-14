@@ -61,7 +61,7 @@ outline: none;
 
 export const RecoverButton = styled.div`
 margin-top: 26px;
-background-color: transparent;
+background-color: #ffffff;
 border: none;
 font-size: 17px;
 color: #c1c1c1;
@@ -75,12 +75,20 @@ outline: none;
     margin-left: 140px;
     margin-bottom: 22px;
 }
+
+a {
+    outline: none;
+    cursor: pointer;
+    font-style: italic;
+    background-color: #ffffff;
+    text-decoration: none;
+    color: #C1C1C1;
+}
 `;
 
 export const SubmitButton = styled.button`
 min-width: fit-content;
 height: 96px;
-background-color: transparent;
 border: none;
 border-radius: 0 0 10px 10px;
 opacity: 1;
@@ -93,6 +101,7 @@ justify-content: center;
 outline: none;
 cursor: pointer;
 font-style: italic;
+background-color: #ffffff;
 
 @media (max-width: 991px) {
     height: 48px;
@@ -101,6 +110,21 @@ font-style: italic;
     display: flex;
     flex-direction: row;
 }
+
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    font-style: italic;
+    cursor: pointer;
+    text-decoration: none;
+    color: #b5c401;
+    background-color: #ffffff;
+}
+
+
 `;
 
 export const HandleButton = styled.button`
@@ -110,12 +134,10 @@ border: none;
 font-size: 35px;
 font-weight: bold;
 color: #707070;
-outline: none;
-cursor: pointer;
 display: flex;
 align-items: center;
 justify-content: center;
-font-style: italic;
+
 
 @media (max-width: 991px) {
     height: 48px;
@@ -124,4 +146,17 @@ font-style: italic;
     display: flex;
     flex-direction: row;
 }
+
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    font-style: italic;
+    cursor: pointer;
+    text-decoration: none;
+    color: #707070;
+}
+
 `;

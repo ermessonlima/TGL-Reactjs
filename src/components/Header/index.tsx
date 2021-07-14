@@ -1,5 +1,7 @@
 import React from 'react';
 import { HeaderContainer, NavBarLeft, Title, NavBarRight } from "./styles";
+import { Link } from 'react-router-dom';
+
 
 function Header() {
     return (
@@ -13,7 +15,7 @@ function Header() {
             <NavBarRight>
                 <a href="/account">Account</a>
                 <button>
-                    Logout
+                    <Link to="/">Logout</Link>
                 </button>
             </NavBarRight>
         </HeaderContainer>

@@ -7,16 +7,21 @@ import {
     SubmitButton,
     HandleButton,
 } from "./styles";
+import { Link } from 'react-router-dom';
+import { FiArrowRight } from "react-icons/fi";
 
 const Authentication = () => {
-return (
+
+
+
+    return (
         <Container>
             <h1>Authentication</h1>
             <Form onSubmit={() => { }}>
                 <Input
                     placeholder="Email"
                     id="email"
-                    type="email"                    
+                    type="email"
                 />
                 <Input
                     placeholder="Password"
@@ -24,17 +29,24 @@ return (
                     type="password"
                 />
                 <RecoverButton >
-                    I forgot my password
+                    <Link to="/recover">  I forgot my password  </ Link>
+
                 </RecoverButton>
                 <SubmitButton type="submit">
-                    Log In 
+                    <Link to="/home">
+                        Log In
+                        <FiArrowRight style={{ background: '#fff' }} />
+                    </ Link>
                 </SubmitButton>
             </Form>
             <HandleButton >
-                Sign Up 
+                <Link to="/register">
+                    Sign Up
+                    <FiArrowRight />
+                </ Link>
             </HandleButton>
         </Container>
-);
+    );
 };
 
 export default Authentication;

@@ -6,6 +6,8 @@ import {
     SubmitButton,
     HandleButton,
 } from "./styles";
+import {Link} from 'react-router-dom';
+import {  FiArrowRight } from "react-icons/fi";
 
 const Authentication = () => {
     return (
@@ -28,11 +30,11 @@ const Authentication = () => {
                         id="password"
                     />
                     <SubmitButton type="submit">
-                        Register
+                        Register <FiArrowRight />
                     </SubmitButton>
                 </Form>
                 <HandleButton >
-                    Back
+                <Link to="/"> Back </ Link>
                 </HandleButton>
             </Container>
     );

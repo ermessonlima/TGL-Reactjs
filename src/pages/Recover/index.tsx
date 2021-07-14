@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import Authentication from "../../components/Authentication/auth";
+import RecoverPassword from "../../components/Authentication/recoverPassword";
 import { Container, Title } from "./styles";
 
-const Login = () => {
+
+const Recover = () => {
 
     return (
             <Container>
@@ -11,9 +12,9 @@ const Login = () => {
                     <div>for</div>
                     <h1>LOTTERY</h1>
                 </Title>
-                <Authentication  />
+                <RecoverPassword  />
             </Container>
     );
 };
 
-export default Login;
+export default Recover;
