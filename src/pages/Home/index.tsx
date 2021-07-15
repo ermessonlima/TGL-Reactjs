@@ -13,20 +13,21 @@ import {
 } from "./styles";
 
 const Home = () => {
-
+    
     return (
         <>
-            <Header  />
+            <Header />
             <HomeContainer>
                 <HomeContent>
                     <GameOptions>
                         <h1>RECENT GAMES</h1>
                         <p>Filters</p>
-                        {'Botões'}
+                  
                         <Link to="/bet">
                             New Bet
                             <FiArrowRight />
                         </Link>
+                     
                     </GameOptions>
                 </HomeContent>
                 <GamesContainer>{'Jogos'}</GamesContainer>
