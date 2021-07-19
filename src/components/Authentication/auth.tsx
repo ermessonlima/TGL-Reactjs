@@ -1,4 +1,4 @@
-import React from "react";
+import { useDispatch } from 'react-redux';
 import {
     Container,
     Form,
@@ -9,15 +9,23 @@ import {
 } from "./styles";
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from "react-icons/fi";
-
+import { useSelector } from "react-redux";
+import * as exampleActions from "../../store/modules/example/actions"
 const Authentication = () => {
+    const dispatch = useDispatch();
 
+    const  handleClick = (e:any) => {
+         e.preventDefault();
+        dispatch(exampleActions.clicaBotao());
+    }
+    const botaoClicado = useSelector((state:any) => state.example.botaoClicado);
+    console.log(botaoClicado)
 
 
     return (
         <Container>
             <h1>Authentication</h1>
-            <Form onSubmit={() => { }}>
+            <Form >
                 <Input
                     placeholder="Email"
                     id="email"
@@ -32,8 +40,8 @@ const Authentication = () => {
                     <Link to="/recover">  I forgot my password  </ Link>
 
                 </RecoverButton>
-                <SubmitButton type="submit">
-                    <Link to="/home">
+                <SubmitButton type="submit" onClick={handleClick}>
+                    <Link to="/home" >
                         Log In
                         <FiArrowRight style={{ background: '#fff' }} />
                     </ Link>

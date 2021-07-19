@@ -1,4 +1,3 @@
-import React from 'react';
 import { HeaderContainer, NavBarLeft, Title, NavBarRight } from "./styles";
 import { Link } from 'react-router-dom';
 
@@ -13,7 +12,7 @@ function Header() {
                 {'Home'}
             </NavBarLeft>
             <NavBarRight>
-                <a href="/account">Account</a>
+            <Link to="/Account">Account</Link>
                 <button>
                     <Link to="/">Logout</Link>
                 </button>

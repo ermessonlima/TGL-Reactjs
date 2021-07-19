@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -26,10 +26,7 @@ export interface Game {
     'min-cart-value': number;
 }
 
-
-
 const Bet: any = () => {
-
     const [games, setGames] = useState<Game[]>([]);
     const [info, setInfo] = useState<any>({ ...games[0] });
     const [numbers, setNumbers] = useState<number[]>([]);
@@ -38,10 +35,6 @@ const Bet: any = () => {
         getGames()
         
     },[])
-
-    function clearBalls() {
-        return setNumbers([]);
-    }
 
     const getGames = () => {
         axios.get('./games.json')
@@ -52,6 +45,11 @@ const Bet: any = () => {
                 console.log(err);
             })
     }
+
+    function clearBalls() {
+        return setNumbers([]);
+    }
+
 
     function getGameType(type: any) {
         return games.find((field) => field.type === type);

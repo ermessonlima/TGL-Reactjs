@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import Header from "../../components/Header";
@@ -7,9 +6,7 @@ import {
     HomeContainer,
     HomeContent,
     GameOptions,
-    GameButton,
     GamesContainer,
-    Game,
 } from "./styles";
 
 const Home = () => {

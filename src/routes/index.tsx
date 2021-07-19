@@ -1,32 +1,24 @@
-import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import Login from "../pages/Login";
-import Home from "../pages/Home";
-import Registration from "../pages/Registration";
-import Recover from "../pages/Recover";
 import Bet from "../pages/Bet";
+import MyRoute from "./MyRoute";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Recover from "../pages/Recover";
+import Page404 from "../pages/Page404";
+import Account from "../pages/Account";
+import { Switch } from "react-router-dom";
+import Registration from "../pages/Registration";
 
 const Routes = () => {
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/">
-                    <Login /> 
-                </Route>
-                <Route exact path="/register">
-                    <Registration /> 
-                </Route>
-                <Route exact path="/recover">
-                    <Recover /> 
-                </Route>
-                <Route exact path="/home">
-                    <Home /> 
-                </Route>
-                <Route exact path="/bet">
-                    <Bet /> 
-                </Route>
-            </Switch>
-        </BrowserRouter>
+        <Switch>
+            <MyRoute isClosed={false} exact path="/" component={Login} />
+            <MyRoute isClosed exact path="/bet" component={Bet} />
+            <MyRoute isClosed={false} exact path="/register" component={Registration} />
+            <MyRoute isClosed={false} exact path="/recover" component={Recover} />
+            <MyRoute isClosed exact path="/home" component={Home} />
+            <MyRoute isClosed exact path="/account" component={Account} />
+            <MyRoute isClosed={false} path="*" component={Page404} />
+        </Switch>
     );
 };
 

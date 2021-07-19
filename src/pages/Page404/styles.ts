@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     max-width: 1200px;
     height: 90vh;
@@ -28,23 +28,6 @@ export const Title = styled.div`
     margin: 30px;
     font-weight: bold;
 
-    h2 {
-        font-size: 65px;
-        flex-wrap: wrap;
-        width: 244px;
-        color:#707070;
-    }
-    div {
-        padding: 7px 57px;
-        background-color: #b5c401;
-        color: #fff;
-        border-radius: 100px;
-        font-size: 22px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 30px 0 20px 0;
-    }
     h1 {
         font-size: 83px;
     }

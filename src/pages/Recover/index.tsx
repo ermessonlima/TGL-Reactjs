@@ -1,10 +1,7 @@
-import React, {useState} from "react";
 import RecoverPassword from "../../components/Authentication/recoverPassword";
 import { Container, Title } from "./styles";
 
-
 const Recover = () => {
-
     return (
             <Container>
                 <Title>
