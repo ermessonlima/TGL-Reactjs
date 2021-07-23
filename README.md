@@ -1,47 +1,91 @@
-# Getting Started with Create React App
+# Readme
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+My name is Ermesson Lima.
 
-## Available Scripts
+I welcome each and everyone of you.
 
-In the project directory, you can run:
+# What is it?
+`Prova-TGL-ReactJS` It is an example of a project developed with:
 
-### `yarn start`
+- REACT JS
+- HTML 
+- CSS
+- JAVASCRIPT
+- JSON
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Images
+<table>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  <tr>
+    <td align="center"><img src="/_docs/1.PNG" width="800"> <br /><sub><b>TGL</b></sub></a><br /></td> 
 
-### `yarn test`
+  </tr>
+    <tr>
+    <td align="center"><img src="/_docs/2.PNG" width="800"> <br /><sub><b>TGL</b></sub></a><br /></td> 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  </tr>
+     <tr>
+    <td align="center"><img src="/_docs/3.PNG" width="800"> <br /><sub><b>TGL</b></sub></a><br /></td> 
 
-### `yarn build`
+  </tr>
+     <tr>
+    <td align="center"><img src="/_docs/4.PNG" width="800"> <br /><sub><b>TGL</b></sub></a><br /></td> 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  </tr>
+     <tr>
+    <td align="center"><img src="/_docs/5.PNG" width="800"> <br /><sub><b>TGL</b></sub></a><br /></td> 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+</table>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Getting Started
 
-### `yarn eject`
+To install this example application, run the following commands:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+git clone https://github.com/ermessonlima/TGL-Reactjs.git
+cd TGL-Reactjs-main
+yarn install
+yarn start
+```
+This will get a copy of the project downloaded locally.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Developer
 
-## Learn More
+<table>
+  <tr>
+    <td align="center"><a href="https://www.instagram.com/ermesson_lima/"><img src="https://avatars.githubusercontent.com/u/59540379?v=4" width="100px;" alt=""/><br /><sub><b>Ermesson Lima</b></sub></a><br /><a href="https://github.com/ermessonlima/Luby-Test" title="Code">💻</a></td>
+  </tr>
+</table>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-"# TGL-Reactjs" 
+# Leia-me
+
+Meu nome é Ermesson Lima.
+
+Eu dou as boas-vindas a cada um de vocês.
+
+# O que é isso?
+`Prova-TGL-ReactJs` É um exemplo de projeto desenvolvido com:
+
+- REACT JS
+- HTML 
+- CSS
+- JAVASCRIPT
+- JSON
+
+
+# Começando
+
+Para utilizar este projeto de exemplo, execute os seguintes comandos:
+
+```bash
+git clone https://github.com/ermessonlima/TGL-Reactjs.git
+cd TGL-Reactjs-main
+yarn install
+yarn start
+```
+Isso fará com que uma cópia do projeto seja baixado localmente.
+
+

@@ -111,7 +111,7 @@ const Account = () => {
                 />
 
                 <SubmitButton type="submit">
-                    Register <FiArrowRight />
+                    Change <FiArrowRight />
                 </SubmitButton>
 
             </Form>
