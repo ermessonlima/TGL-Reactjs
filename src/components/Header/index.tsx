@@ -1,19 +1,25 @@
 import { HeaderContainer, NavBarLeft, Title, NavBarRight } from "./styles";
 import { Link } from 'react-router-dom';
+import history from '../../services/history';
 
+function Header({home}) {
 
-function Header() {
+    function handleSubmit(e) {
+        e.preventDefault();
+        history.push('/')
+    }
+   
     return (
         <HeaderContainer>
             <NavBarLeft>
                 <Title>
                     TGL<div></div>
                 </Title>
-                {'Home'}
+                { home && <Link to="/home">Home</Link>}
             </NavBarLeft>
             <NavBarRight>
             <Link to="/Account">Account</Link>
-                <button>
+                <button onClick={handleSubmit}>
                     <Link to="/">Logout</Link>
                 </button>
             </NavBarRight>

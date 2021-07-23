@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeContainer = styled.div`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -18,7 +18,7 @@ export const HomeContainer = styled.div`
         margin-right: 15px;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -35,19 +35,20 @@ export const HomeContainer = styled.div`
     }
 `;
 
-export const HomeContent = styled.div`
+export const Content = styled.div`
     display: flex;
     flex-direction: row;
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
+
 `;
 
-export const GameOptions = styled.div`
+export const BetOptions = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -66,8 +67,9 @@ export const GameOptions = styled.div`
         text-decoration: none;
         margin-left: 340px;
     }
+    
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         display: flex;
         flex-direction: column;
 
@@ -85,7 +87,7 @@ export const GameOptions = styled.div`
     }
 `;
 
-export const GameButton = styled.div`
+export const GameButton = styled.div<any>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,9 +98,9 @@ export const GameButton = styled.div`
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    background-color:   color: #868686;
-    color:   color: #868686;
-    border-color:   color: #868686;
+    background-color: ${(props) => props.backgroundColor};
+    color: ${(props) => props.fontColor};
+    border-color: ${(props) => props.borderColor};
 `;
 
 export const GamesContainer = styled.div`
@@ -109,7 +111,7 @@ export const GamesContainer = styled.div`
     overflow-y: auto;
     margin: 25px 0;
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         margin: 25px 10px;
     }
 `;
@@ -150,7 +152,7 @@ export const Game = styled.div`
         color: ${(props) => props.color};
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         h1 {
             font-size: 12px;
         }

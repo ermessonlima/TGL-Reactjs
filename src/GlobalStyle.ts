@@ -5,7 +5,7 @@ export default createGlobalStyle`
 * {
     margin: 0px;
     padding: 0px;
-    
+    text-decoration: none;
   }
 
   

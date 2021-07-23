@@ -1,5 +1,5 @@
-import RecoverPassword from "../../components/Authentication/recoverPassword";
 import { Container, Title } from "./styles";
+import RecoverPassword from "../../components/Authentication/recoverPassword";
 
 const Recover = () => {
     return (

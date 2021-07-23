@@ -1,6 +1,5 @@
-import Authentication from "../../components/Authentication/auth";
 import { Container, Title } from "./styles";
-
+import Authentication from "../../components/Authentication/auth";
 
 const Login = () => {
 

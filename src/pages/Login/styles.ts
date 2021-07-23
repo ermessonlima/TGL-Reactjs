@@ -51,7 +51,6 @@ export const Title = styled.div`
 
     @media (max-width: 900px) {
         padding-bottom: 30px;
-        border-bottom: 2px solid #ebebeb;
         width: 100%;
 
         h2 {

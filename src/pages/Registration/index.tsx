@@ -1,6 +1,5 @@
-import React, {useState} from "react";
-import Registration from "../../components/Authentication/register";
 import { Container, Title } from "./styles";
+import Registration from "../../components/Authentication/register";
 
 const Register = () => {
     return (

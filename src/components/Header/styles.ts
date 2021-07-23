@@ -9,10 +9,11 @@ export const HeaderContainer = styled.div`
     justify-content: space-between;
     border-bottom: 2px solid #ebebeb;
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        height: 30px;
     }
 `;
 
@@ -31,7 +32,7 @@ export const NavBarLeft = styled.div`
         cursor: pointer;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         flex-direction: row;
         align-items: center;
 
@@ -116,7 +117,7 @@ export const Title = styled.div`
         opacity: 1;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 900px) {
         font-size: 22px;
         margin: 0 10px;
 
