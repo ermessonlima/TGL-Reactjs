@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import { FiArrowRight } from "react-icons/fi";
 
-
 interface userState {
     usuario: {
         user: {

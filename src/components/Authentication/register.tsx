@@ -52,13 +52,13 @@ const Authentication = () => {
                     username: username,
                     email: email,
                     password: password
-                }
+                },
             }
         })
+
         toast.success('Você fez seu cadastro!')
         history.push('/')
     }
-
 
 
     return (

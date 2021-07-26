@@ -10,7 +10,7 @@ import {
     Save,
 } from "./styles";
 
-const Cart = ({ bets, removeBet, cartValue, background, color }) => {
+const Cart = ({ bets, removeBet, cartValue, background, color, disabled }) => {
 
     const dispatch = useDispatch();
 
@@ -65,14 +65,21 @@ const Cart = ({ bets, removeBet, cartValue, background, color }) => {
                 <h1>
                     <b>CART</b> TOTAL: {convertCoin(cartValue)}
                 </h1>
-                <Link to="/home">
+                {disabled && <Link to="/home">
                     <Save
                         style={{ background, color }}
                         onClick={saveBets}>
                         <p>Save</p>
                         <FiArrowRight style={{ marginLeft: 15 }} />
                     </Save>
-                </Link>
+                </Link>}
+                {!disabled && <Save
+                    style={{ background, color }} >
+                    <p>Save</p>
+                    <FiArrowRight style={{ marginLeft: 15 }} />
+                </Save>}
+
+
             </CartContainer>
         </>
     );

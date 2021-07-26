@@ -217,7 +217,9 @@ const Bet = () => {
                             ? "#ffffff"
                             : "#27c383"
                     }
-
+                    disabled={ cartValue >= info["min-cart-value"]
+                    ? true
+                    : false}
                     bets={bets}
                     removeBet={removeBet}
                     cartValue={cartValue}

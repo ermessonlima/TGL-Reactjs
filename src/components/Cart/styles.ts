@@ -93,6 +93,7 @@ export const Save = styled.div`
     border-radius: 0 0 10px 10px;
     cursor: pointer;
     border: 1px solid #e2e2e2;
+
  
 `;
 
