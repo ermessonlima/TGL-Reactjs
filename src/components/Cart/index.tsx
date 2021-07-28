@@ -9,6 +9,7 @@ import {
     EmptyCart,
     Save,
 } from "./styles";
+import { toast } from 'react-toastify';
 
 const Cart = ({ bets, removeBet, cartValue, background, color, disabled }) => {
 
@@ -27,6 +28,9 @@ const Cart = ({ bets, removeBet, cartValue, background, color, disabled }) => {
                 }
             })
         })
+    }
+    function errorBets() {
+        toast.error('Minimum amount, BRL 30.00.')
     }
 
     function convertCoin(value) {
@@ -74,7 +78,8 @@ const Cart = ({ bets, removeBet, cartValue, background, color, disabled }) => {
                     </Save>
                 </Link>}
                 {!disabled && <Save
-                    style={{ background, color }} >
+                    style={{ background, color }} 
+                    onClick={errorBets}>
                     <p>Save</p>
                     <FiArrowRight style={{ marginLeft: 15 }} />
                 </Save>}

@@ -43,13 +43,9 @@ const Authentication = () => {
 
         if (password.length < 6 || password.length > 50) {
             formErros = true;
-            toast.error('Invalid password.')
+            toast.error('Password must be between 6 to 50 characters.')
         }
 
-        if (email != isEmailVerified.email || password != isEmailVerified.password) {
-            formErros = true;
-            toast.error('Invalid user')
-        }
 
 
         if (formErros) {

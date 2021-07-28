@@ -43,6 +43,7 @@ const Home = () => {
         axios.get('./games.json')
             .then((res) => {
                 setBetType(res.data.types);
+                console.log(res.data.types)
             }).catch((err) => {
                 console.log(err);
             })
