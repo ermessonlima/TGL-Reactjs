@@ -6,11 +6,14 @@ import {
     SubmitButton,
     HandleButton,
 } from "./styles";
+import { get } from 'lodash';
 import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import axios from '../../services/axios';
 import { useSelector } from "react-redux";
 import { FiArrowLeft } from "react-icons/fi";
+import history from '../../services/history';
 
 interface userState {
     usuario: {
@@ -25,9 +28,8 @@ interface userState {
 const Authentication = () => {
 
     const [email, setEmail] = useState('');
-    const isEmailVerified = useSelector((state: userState) => state.usuario.user);
-    
-    function handleSubmit(e) {
+
+   async  function handleSubmit(e) {
         e.preventDefault();
         let formErros = false;
 
@@ -36,15 +38,27 @@ const Authentication = () => {
             toast.error('Invalid e-mail')
         }
 
-        if (email != isEmailVerified.email ) {
-            formErros = true;
-            toast.error('Invalid user')
-        }
-
         if (formErros) {
             return;
         }
       
+
+        try {
+            await axios.post('/passwords', {
+                 email,
+                 redirect_url: "http://localhost:3000/reset"
+             });
+
+             toast.success('Email successfully sent!')
+             history.push('/')
+ 
+         } catch (e) {
+             const errors = get(e, 'response.data',[]);
+             errors.map(error => toast.error(error.message) )
+            
+         }
+
+
         toast.success('Check your inbox!')
     }
 

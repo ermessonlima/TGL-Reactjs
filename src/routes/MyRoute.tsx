@@ -2,7 +2,7 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 interface userState {
-    usuario: {
+    auth: {
         isLoggedIn: boolean;
     }
 }
@@ -13,7 +13,7 @@ export default function MyRoute({ component: Component, isClosed, ...rest }: {
     component: any;
     isClosed: boolean | any ;
 }): JSX.Element  {
-    const isLoggedIn = useSelector((state: userState) => state.usuario.isLoggedIn);
+   const isLoggedIn = useSelector((state: userState) => state.auth.isLoggedIn);
 
     if( isClosed && !isLoggedIn ) {
         return (

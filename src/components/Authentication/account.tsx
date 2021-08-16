@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Container,
     Form,
@@ -8,16 +8,15 @@ import {
 } from "./styles";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useSelector } from "react-redux";
-import { useDispatch } from 'react-redux';
 import { FiArrowRight } from "react-icons/fi";
+import { useSelector, useDispatch} from "react-redux";
+import * as actions from '../../store/modules/auth/actions'
 
 interface userState {
-    usuario: {
+    auth: {
         user: {
             username: string;
-            email: string;
-            password: string;
+            id: number;
         }
     }
 }
@@ -25,14 +24,23 @@ interface userState {
 const Account = () => {
 
     const dispatch = useDispatch();
-    const user = useSelector((state: userState) => state.usuario.user);
-    const [usernameNew, setusernameNew] = useState('');
+    const id = useSelector((state: userState) => state.auth.user.id);
+    const username = useSelector((state: userState) => state.auth.user.username);
+   
+   const [usernameNew, setusernameNew] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+
+
+    useEffect(() => {
+        setusernameNew(username);
+    },[])
 
     function handleSubmit(e) {
         e.preventDefault();
         let formErros = false;
+
+        console.log(password)
 
         //Verifica se o nome do usuario é menor que 3 caracteres e menor que 255
         if (usernameNew.length < 3 || usernameNew.length > 255) {
@@ -40,11 +48,7 @@ const Account = () => {
             toast.error('Name must be between 3 to 255 characters.')
         }
 
-        //Verifica se a senha é menor que 6 caracteres e menor que 50
-        if (password.length < 6 || password.length > 50) {
-            formErros = true;
-            toast.error('Password must be between 6 to 50 characters.')
-        }
+
 
         //Verifica se as senha são iguais
         if (password != repeatPassword) {
@@ -56,34 +60,15 @@ const Account = () => {
         if (formErros) {
             return;
         }
-        try {
-            const response = {
-                usernameNew,
-                password,
-            }
 
-            //Mensagem de sucesso ao atender todos os requisitos.
-            toast.success('Changed successfully!')
 
-        } catch (e) {
-            console.log(e)
-        }
-        //Alteração do usuario no redux
-        dispatch({
-            type: 'SET_LOGIN',
-            payload: {
-                user: {
-                    username: usernameNew,
-                    email: user.email,
-                    password: password
-                }
-            }
-        })
+       dispatch(actions.registerRequest({usernameNew, password, id}));
+
     }
 
     return (
         <Container>
-            <h1>Hi, {user.username}!</h1>
+          { <h1>Account</h1>}
             <Form onSubmit={handleSubmit}>
                 <Input
                     placeholder="Username"

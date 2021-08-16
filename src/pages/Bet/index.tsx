@@ -9,12 +9,12 @@ import {
     BetButton,
     AddToCart,
 } from "./styles";
-import axios from 'axios';
 import Cart from "../../components/Cart";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { FiShoppingCart } from "react-icons/fi";
+import axios from '../../services/axios';
 
 export interface Game {
     type: string;
@@ -35,20 +35,17 @@ const Bet = () => {
     let [cartValue, setCartValue] = useState(0);
 
     useEffect(() => {
-        getGames()
+        async function getData(){
+        const response = await axios.get('/games')
+         const { data } = response;
+         console.log(data)
+               setGames(data);
+               setInfo(data[0] )
+        }
+        getData()
     }, [])
 
 
-    //Adicionar os jogos
-    const getGames = () => {
-        axios.get('./games.json')
-            .then((res) => {
-                setGames(res.data.types);
-                setInfo(res.data.types[0] )
-            }).catch((err) => {
-                console.log(err);
-            })
-    }
 
     //Trocar . por ,
     function convertCoin(value) {
@@ -74,7 +71,7 @@ const Bet = () => {
         let balls = numbers;
         if (balls.includes(number)) {
             balls.splice(balls.indexOf(number), 1);
-        } else if (balls.length < info["max-number"]) {
+        } else if (balls.length < info["max_number"]) {
             balls.push(number);
         } else {
             return;
@@ -86,7 +83,7 @@ const Bet = () => {
     function handleCompleteBet() {
         const numbers = []
         let balls = numbers;
-        for (let i = numbers.length; i < info["max-number"]; i++) {
+        for (let i = numbers.length; i < info["max_number"]; i++) {
             let currentNumber = 0;
             do {
                 currentNumber = Math.ceil(Math.random() * info.range);
@@ -98,13 +95,13 @@ const Bet = () => {
 
     //Adicionar 0 aos numeros menores que 10
     function handleBetNumbers() {
-        return numbers.map((field) => (field < 10 ? `0${field}` : field)).sort((x: number, y: number) => x - y).join(" - ");
+        return numbers.map((field) => (field < 10 ? `0${field}` : field)).sort((x: number, y: number) => x - y).join(",");
     }
 
     function handleNewBet() {
         return {
             numbers: handleBetNumbers(),
-            type: info.type,
+            game_id: info.id,
             price: convertCoin(info.price),
             color: info.color,
         };
@@ -112,6 +109,7 @@ const Bet = () => {
 
     //Adicionar ao carrinho
     function addCart(bet) {
+        console.log(bet)
         clearNumbers();
         handleUpdateCartPrice(bet.price);
         return setBets([...bets, bet]);
@@ -187,12 +185,12 @@ const Bet = () => {
                         <BetButton onClick={clearNumbers}>Clear game</BetButton>
                         <AddToCart
                             background={
-                                numbers.length === info["max-number"]
+                                numbers.length === info["max_number"]
                                     ? "#27c383"
                                     : "#7fd4b1"
                             }
                             onClick={
-                                numbers.length === info["max-number"]
+                                numbers.length === info["max_number"]
                                     ? () => addCart(handleNewBet())
                                     : null
                             }
@@ -207,17 +205,17 @@ const Bet = () => {
                 </BetContent>
                 <Cart
                     background={
-                        cartValue >= info["min-cart-value"]
+                        cartValue >= info["min_cart_value"]
                             ? "#27c383"
                             : "#fafafa"
                     }
 
                     color={
-                        cartValue >= info["min-cart-value"]
+                        cartValue >= info["min_cart_value"]
                             ? "#ffffff"
                             : "#27c383"
                     }
-                    disabled={ cartValue >= info["min-cart-value"]
+                    disabled={ cartValue >= info["min_cart_value"]
                     ? true
                     : false}
                     bets={bets}

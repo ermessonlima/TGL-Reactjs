@@ -12,6 +12,8 @@ import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 import history from '../../services/history';
 import { useDispatch } from 'react-redux';
+import axios from '../../services/axios';
+import { get } from 'lodash';
 
 const Authentication = () => {
     const [username, setUsername] = useState('');
@@ -19,7 +21,7 @@ const Authentication = () => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         let formErros = false;
 
@@ -45,19 +47,23 @@ const Authentication = () => {
             return;
         }
 
-        dispatch({
-            type: 'SET_LOGIN',
-            payload: {
-                user: {
-                    username: username,
-                    email: email,
-                    password: password
-                },
-            }
-        })
+        try {
+           await axios.post('/users', {
+                username,
+                email,
+                password,
+                password_confirmation: password
 
-        toast.success('Você fez seu cadastro!')
-        history.push('/')
+            });
+            toast.success('You have registered!')
+            history.push('/')
+
+        } catch (e) {
+            const errors = get(e, 'response.data',[]);
+            errors.map(error => toast.error(error.message) )
+           
+        }
+
     }
 
 

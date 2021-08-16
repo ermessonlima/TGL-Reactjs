@@ -15,9 +15,10 @@ import { useDispatch } from 'react-redux';
 import history from '../../services/history';
 import { FiArrowRight } from "react-icons/fi";
 import * as actions from '../../store/modules/auth/actions'
-
+import { useLocation } from 'react-router-dom'
 import * as exampleActions from "../../store/modules/example/actions";
 
+import axios from '../../services/axios';
 import { get } from 'lodash';
 
 
@@ -31,38 +32,59 @@ interface userState {
     }
 }
 
-const Authentication = (props) => {
+function useQuery() {
+    return new URLSearchParams(useLocation().search)
+}
+
+
+const Reset = (props) => {
+
+    let query = useQuery();
+
 
     const prevPath = get(props, 'location.state.prevPath', '/');
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-   // const isEmailVerified = useSelector((state: userState) => state.usuario.user);
+    const [passwordConfirm, setPasswordConfirm] = useState('');
  
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         dispatch(exampleActions.clicaBotaoRequest()) 
 
      let formErros = false;
 
-        if (!isEmail(email)) {
-            formErros = true;
-            toast.error('Invalid email.')
-        }
+
 
         if (password.length < 6 || password.length > 50) {
             formErros = true;
             toast.error('Password must be between 6 to 50 characters.')
         }
 
+        if (password != passwordConfirm) {
+            formErros = true;
+            toast.error('Different passwords.')
+        }
 
 
         if (formErros) {
             return;
         }
 
-        dispatch(actions.loginRequest({email, password, prevPath}))
+      console.log( query.get('token'))
+        try {
+            await axios.put('/passwords', {
+                token: query.get('token'),
+                password,
+                password_confirmation: passwordConfirm
+            })
+
+            toast.success('Password changed successfully!')
+            history.push('/')
+
+        } catch (e) {
+          console.log(e)
+        }
 
 
     }
@@ -70,18 +92,10 @@ const Authentication = (props) => {
     return (
         <Container>
           
-            <h1>Authentication</h1>
+            <h1>Reset Password</h1>
           
             <Form onSubmit={handleSubmit}>
-                <Input
-                    placeholder="Email"
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-
-                <Input
+            <Input
                     placeholder="Password"
                     type="password"
                     id="password"
@@ -89,25 +103,25 @@ const Authentication = (props) => {
                     onChange={e => setPassword(e.target.value)}
                 />
 
-                <RecoverButton >
-                    <Link to="/recover">  I forgot my password  </ Link>
-                </RecoverButton>
+                <Input
+                    placeholder="Confirm the Password"
+                    type="password"
+                    id="password"
+                    value={passwordConfirm}
+                    onChange={e => setPasswordConfirm(e.target.value)}
+                />
+
 
                 <SubmitButton type="submit" onClick={handleSubmit}>
-                    Log In
-                    <FiArrowRight style={{ background: '#fff' }} />
+                    Send
+                <FiArrowRight style={{ background: '#fff' }} />
 
                 </SubmitButton>
             </Form>
             
-            <HandleButton >
-                <Link to="/register">
-                    Sign Up
-                    <FiArrowRight />
-                </ Link>
-            </HandleButton>
+
         </Container>
     );
 };
 
-export default Authentication;
+export default Reset;

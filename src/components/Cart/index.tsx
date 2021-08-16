@@ -1,5 +1,6 @@
 import { FiTrash2, FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import {useState} from 'react'
 import { useDispatch } from "react-redux";
 import {
     CartContainer,
@@ -10,24 +11,51 @@ import {
     Save,
 } from "./styles";
 import { toast } from 'react-toastify';
+import axios from '../../services/axios';
+import history from '../../services/history';
+import { get } from 'lodash';
 
 const Cart = ({ bets, removeBet, cartValue, background, color, disabled }) => {
 
     const dispatch = useDispatch();
+   
 
-    function saveBets() {
-        bets.map((bet) => {
-            dispatch({
-                type: 'SET_GAMES',
-                payload: {
-                    numbers: bet.numbers,
-                    data: bet.data,
-                    price: bet.price,
-                    color: bet.color,
-                    type: bet.type,
-                }
-            })
+   async function saveBets(e) {
+
+    e.preventDefault();
+
+       const teste =  bets.map((bet) => {
+           return {
+                game_id: bet.game_id,
+               numbers: bet.numbers
+            }
+   
+
         })
+
+     
+
+
+      console.log(teste)
+      
+      try {
+        await axios.post('/bets', 
+            teste
+
+         );
+
+
+         toast.success(' Bet placed successfully!')
+         history.push('/home')
+
+
+      }catch (e) {
+        const errors = get(e, 'response.data',[]);
+     //   errors.map(error => toast.error(error.message) )
+       console.log(errors)
+      }
+      
+
     }
     function errorBets() {
         toast.error('Minimum amount, BRL 30.00.')
@@ -69,14 +97,14 @@ const Cart = ({ bets, removeBet, cartValue, background, color, disabled }) => {
                 <h1>
                     <b>CART</b> TOTAL: {convertCoin(cartValue)}
                 </h1>
-                {disabled && <Link to="/home">
+                {disabled && 
                     <Save
                         style={{ background, color }}
                         onClick={saveBets}>
                         <p>Save</p>
                         <FiArrowRight style={{ marginLeft: 15 }} />
                     </Save>
-                </Link>}
+              }
                 {!disabled && <Save
                     style={{ background, color }} 
                     onClick={errorBets}>

@@ -12,7 +12,8 @@ import {
     GamesContainer,
     Game,
 } from "./styles";
-import axios from 'axios';
+import axios from '../../services/axios';
+
 
 interface userState {
     usuario: {
@@ -30,24 +31,36 @@ interface userState {
 
 const Home = () => {
 
-    const betsGames = useSelector((state: userState) => state.usuario.games);
+
+
+
     const [betType, setBetType] = useState<any>([])
     const [bets, setBets] = useState([])
+    const [betsFilter, setbetsFilter] = useState([])
 
     useEffect(() => {
-        getGames()
-        setBets(betsGames)
+       
+        async function getData(){
+            const response = await axios.get('/bets')
+             const { data } = response;
+             setBets(data)
+             setbetsFilter(data)
+
+            }
+            getData()
     }, [])
 
-    const getGames = () => {
-        axios.get('./games.json')
-            .then((res) => {
-                setBetType(res.data.types);
-                console.log(res.data.types)
-            }).catch((err) => {
-                console.log(err);
-            })
-    }
+
+    useEffect(() => {
+        async function getData(){
+        const response = await axios.get('/games')
+         const { data } = response;
+         setBetType(data)
+        }
+        getData()
+    }, [])
+
+
 
     //Função para filtrar
     function handleBetFilter(index) {
@@ -56,16 +69,16 @@ const Home = () => {
         setBetType([...aux]);
         if (filterSelected()) {
             setBets(
-                betsGames.filter((bet) => {
+                betsFilter.filter((bet) => {
                     for (let i = 0; i < aux.length; i++) {
-                        if (bet.type === aux[i].type && aux[i].selected)
+                        if (bet.types.type === aux[i].type && aux[i].selected)
                             return true;
                     }
                     return false;
                 })
             );
         } else {
-            setBets(betsGames);
+            setBets(betsFilter);
         }
 
         return;
@@ -89,7 +102,9 @@ const Home = () => {
                     <BetOptions>
                         <h1>RECENT GAMES</h1>
                         <p>Filters</p>
+                   
                         {betType.map((field, index) => {
+    
                             return (
                                 <GameButton
                                     key={field.type}
@@ -110,22 +125,24 @@ const Home = () => {
                     </BetOptions>
                 </Content>
                 <GamesContainer>
-                    {betsGames.length == 1 && <h1>No games, bet now!</h1>}
+                    
+                    {console.log(bets)}
                     {bets.map((field, index) => {
+                  
                         var value = parseFloat(
-                            field.price.replaceAll(/R\$ /g, "").replace(",", ".")
+                            field.price.toString().replaceAll(/R\$ /g, "").replace(",", ".")
                         );
                         if (field.price != "") {
                             return (
-                                <Game key={index} color={field.color}>
+                                <Game key={index} color={field.types.color}>
                                     <span></span>
                                     <div>
                                         <h1>{field.numbers}</h1>
                                         <p>
-                                            {new Date().toLocaleDateString('pt-br')} -
+                                            {new Date(field.created_at).toLocaleDateString('pt-br')} -
                                             ({`R$ ${value.toFixed(2).replace(".", ",")}`})
                                         </p>
-                                        <h4>{field.type}</h4>
+                                        <h4>{field.types.type}</h4>
                                     </div>
                                 </Game>
                             );
