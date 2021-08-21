@@ -12,7 +12,7 @@ function Header({ home }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        dispatch(actions.loginFailure());
+        dispatch(actions.loginFailure((payload: any)=>{}));
 
 
         history.push('/')

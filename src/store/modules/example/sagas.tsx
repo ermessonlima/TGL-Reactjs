@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import * as actions from './actions';
 import * as types from '../types';
 
-const requisicao = () => new Promise((resolve, reject) => {
+const requisicao = () => new Promise((resolve:any, reject) => {
     setTimeout(() =>{
         resolve();
 

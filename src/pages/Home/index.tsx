@@ -14,7 +14,7 @@ import {
 } from "./styles";
 import axios from '../../services/axios';
 
-
+var esportes = [];
 interface userState {
     usuario: {
         games: [
@@ -29,6 +29,9 @@ interface userState {
     }
 }
 
+const MAX_ITEMS = 9;
+const MAX_LEFT = (MAX_ITEMS - 1) / 2
+
 const Home = () => {
 
 
@@ -37,48 +40,121 @@ const Home = () => {
     const [betType, setBetType] = useState<any>([])
     const [bets, setBets] = useState([])
     const [betsFilter, setbetsFilter] = useState([])
+    const [page, setPage] = useState(null)
+    const [pageCurrent, setPageCurrent] = useState(1)
+    const [pageTotal, setPageTotal] = useState(null)
+    const [offSet, setOffset] = useState(0)
 
-    useEffect(() => {
-       
-        async function getData(){
-            const response = await axios.get('/bets')
-             const { data } = response;
-             setBets(data)
-             setbetsFilter(data)
 
-            }
-            getData()
-    }, [])
+    const [urlParams, setUrlParams] = useState('')
+
+
 
 
     useEffect(() => {
-        async function getData(){
-        const response = await axios.get('/games')
-         const { data } = response;
-         setBetType(data)
+
+
+        getData()
+    }, [offSet, urlParams, esportes])
+
+
+    const current = (offSet / pageTotal) + 1;
+    const first = Math.min(
+        Math.max(pageCurrent - MAX_LEFT, 1), 1
+
+    )
+
+
+    useEffect(() => {
+        async function getData() {
+            const response = await axios.get('/games')
+            const { data } = response;
+            setBetType(data)
         }
         getData()
     }, [])
 
+    var numeros = [''];
+    var selected;
 
+    async function getData() {
+        const response = await axios.get(`/bets?page=${current}${urlParams}`)
+        const { data } = response;
+
+        setPageCurrent(data.page ? data.page : 1)
+        setPageTotal(data.lastPage)
+
+        setBets(data.data)
+        setbetsFilter(data.data)
+
+    }
 
     //Função para filtrar
-    function handleBetFilter(index) {
+    function handleBetFilter(index, field) {
+        console.log(field)
+
         let aux = betType;
-        aux[index].selected = !this.selected;
-        setBetType([...aux]);
-        if (filterSelected()) {
-            setBets(
-                betsFilter.filter((bet) => {
-                    for (let i = 0; i < aux.length; i++) {
-                        if (bet.types.type === aux[i].type && aux[i].selected)
-                            return true;
-                    }
-                    return false;
-                })
-            );
+
+
+        if (aux[index].selected) {
+            aux[index].selected = false;
         } else {
-            setBets(betsFilter);
+            aux[index].selected = true;
+        }
+
+        setBetType([...aux]);
+
+        if (aux[index].selected) {
+            console.log('aqui')
+            getData()
+            if (field.type === aux[index].type && aux[index].selected) {
+
+                var total = esportes.push(`&arry[]=${field.id}`);
+
+                var tics = esportes.join('')
+                console.log(esportes);
+                console.log(tics);
+                setUrlParams(tics)
+          
+                return true;
+            }
+        } else {
+            console.log('sdsd')
+            getData()
+
+    
+           
+            var ab = numeros.indexOf(index);
+            if (ab > -1) {
+                esportes.splice(index, 1);
+            }
+
+
+
+            var estados = esportes
+            var buscar = `&arry[]=${field.id}`;
+            var indice = estados.indexOf(buscar);
+            while(indice >= 0){
+                estados.splice(indice, 1);
+                indice = estados.indexOf(buscar);
+            }
+            console.log(estados);
+
+
+
+
+
+
+            var tics = esportes.toString().replaceAll(`&arry[]=${field.id}`, '');
+            var resultado = urlParams.toString().replaceAll(`&arry[]=${field.id}`, '');
+            console.log(resultado)
+            console.log(tics)
+            console.log(esportes);
+
+            var tics = esportes.join('')
+            setUrlParams(tics)
+
+
         }
 
         return;
@@ -87,6 +163,7 @@ const Home = () => {
     //Função para verificar filtro
     function filterSelected() {
         for (let i = 0; i < betType.length; i++) {
+            console.log(betType[i].selected)
             if (betType[i].selected) {
                 return true
             };
@@ -94,21 +171,30 @@ const Home = () => {
         return false;
     }
 
+
+
+    function onPageChange(page) {
+        setOffset((page - 1) * pageTotal)
+    }
+
+
+
     return (
         <>
             <Header home={false} />
             <Container>
                 <Content>
                     <BetOptions>
+
                         <h1>RECENT GAMES</h1>
                         <p>Filters</p>
-                   
+
                         {betType.map((field, index) => {
-    
+
                             return (
                                 <GameButton
                                     key={field.type}
-                                    onClick={() => handleBetFilter.call(field, [index])}
+                                    onClick={() => handleBetFilter(index, field)}
                                     backgroundColor={field.selected ? field.color : "#FFFFFF"}
                                     fontColor={!field.selected ? field.color : "#FFFFFF"}
                                     borderColor={field.color}
@@ -125,10 +211,9 @@ const Home = () => {
                     </BetOptions>
                 </Content>
                 <GamesContainer>
-                    
-                    {console.log(bets)}
+
                     {bets.map((field, index) => {
-                  
+
                         var value = parseFloat(
                             field.price.toString().replaceAll(/R\$ /g, "").replace(",", ".")
                         );
@@ -149,6 +234,41 @@ const Home = () => {
                         }
                     })}
                 </GamesContainer>
+                <ul className="pagination">
+                    <li>
+                        <button
+                            className="btn-primary"
+                            onClick={() => onPageChange(pageCurrent - 1)}
+                            disabled={pageCurrent === 1}
+                        >
+                            Anterior
+                        </button>
+                    </li>
+                    {Array.from({ length: Math.min(MAX_ITEMS, pageTotal) })
+                        .map((_, index) => index + first)
+                        .map((page) => (
+                            <li key={page}>
+                                <button
+                                    className={page === pageCurrent ? 'pagination__item--active' : 'no_active'}
+                                    onClick={() => onPageChange(page)}>
+                                    {page}
+                                </button>
+                            </li>
+                        ))}
+
+                    <li>
+                        <button
+                            className="btn-primary"
+                            onClick={() => onPageChange(pageCurrent + 1)}
+                            disabled={pageCurrent === pageTotal}
+                        >
+                            Proximo
+                        </button>
+                    </li>
+                </ul>
+
+
+
             </Container>
             <Footer />
 

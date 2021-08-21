@@ -50,16 +50,17 @@ const Authentication = () => {
              });
 
              toast.success('Email successfully sent!')
+             toast.success('Check your inbox!')
              history.push('/')
  
          } catch (e) {
              const errors = get(e, 'response.data',[]);
-             errors.map(error => toast.error(error.message) )
+            console.log(e)
             
          }
 
 
-        toast.success('Check your inbox!')
+       
     }
 
 

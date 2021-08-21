@@ -7,7 +7,7 @@ import history from '../../../services/history';
 import { get } from 'lodash';
 
 
-function* loginRequest({payload}){
+function* loginRequest({payload}: any){
     try {
         const response = yield call(axios.post, '/sessions', payload);
         yield put(actions.loginSuccess({...response.data}))
@@ -22,12 +22,12 @@ function* loginRequest({payload}){
     } catch (e) {
         toast.error('Invalid username or password.')
 
-        yield put(actions.loginFailure());
+        yield put(actions.loginFailure((payload: any)=>{}));
     }
 }
   
 
-function persistRehydrate({payload}) {
+function persistRehydrate({payload}:any) {
     const token = get(payload, 'auth.token');
     console.log(token.token)
     if(!token) return null;
@@ -35,7 +35,7 @@ function persistRehydrate({payload}) {
 
 }
 
-function* registerRequest({ payload }){
+function* registerRequest({ payload }:any){
     const { usernameNew, password, id} = payload;
 
     try {
@@ -62,7 +62,7 @@ function* registerRequest({ payload }){
         }
         console.log(e)
 
-        yield put(actions.registerFailure)
+        yield put(actions.registerFailure((payload: any)=>{}))
     }
 
 

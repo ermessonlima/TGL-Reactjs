@@ -60,7 +60,8 @@ const Authentication = () => {
 
         } catch (e) {
             const errors = get(e, 'response.data',[]);
-            errors.map(error => toast.error(error.message) )
+          
+        toast.error('This user is already registered') 
            
         }
 

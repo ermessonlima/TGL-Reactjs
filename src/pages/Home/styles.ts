@@ -18,6 +18,60 @@ export const Container = styled.div`
         margin-right: 15px;
     }
 
+    .pagination {
+        display: flex;
+        list-style: none;
+        margin-top: 15px;
+        margin-bottom: 100px;
+    }
+
+    .pagination li + li {
+        margin-left: 1rem;
+        border: none;
+        width: 25px;
+
+    }
+
+    .pagination__item--active {
+        border: '#7EBCDD';
+        font-weight: bold;
+        font-size:25px;
+        width: 35px;
+        height: 30px;
+        margin-top: -90px;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: -24px;
+        background-color:'#7EBCDD';
+    }
+
+    .no_active {
+        cursor: pointer;
+        border: '#7EBCDD';
+        width: 30px;
+        font-weight: bold;
+        height: 20px;
+        border-radius: 5px;
+        background-color:'#7EBCDD';
+        font-size:15px;
+
+    }
+    .pagination__item--active:focus {
+        outline: none;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        cursor: pointer;
+        border: '#7EBCDD';
+        width: 80px;
+        font-weight: bold;
+        height: 20px;
+        border-radius: 5px;
+        background-color:'#7EBCDD';
+        font-size:15px;
+    }
+
     @media (max-width: 900px) {
         display: flex;
         align-items: center;
